@@ -14,8 +14,6 @@ import { ALL_CATEGORY_DATA } from '@/constants';
 const categorys = ref([])
 const getCategoryData = async () => {
     const res = await getCategory()
-    console.log(res);
-
     categorys.value = res.categorys
     categorys.value.unshift(ALL_CATEGORY_DATA)
 }

@@ -8,7 +8,7 @@
         </transition>
         <!-- 内容 -->
         <transition name=" pop-up-down">
-            <div v-bind="$attrs" v-if="modelValue" class="w-screen bg-white z-50 fixed bottom-0">
+            <div v-bind="$attrs" v-if="modelValue" class="w-screen bg-white dark:bg-zinc-800 z-50 fixed bottom-0">
                 <slot />
             </div>
         </transition>

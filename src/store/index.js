@@ -1,3 +1,1 @@
-import { creatStore } from "vuex";
-
-const store = creatStore({});
+export { useThemeStore } from "./modules/theme";

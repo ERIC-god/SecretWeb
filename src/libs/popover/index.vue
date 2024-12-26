@@ -8,8 +8,8 @@
 
         <!-- 匿名插槽：弹出层视图中展示的内容 -->
         <transition name="slide">
-            <div v-show="isVisible" class="absolute p-1 z-20 bg-white border rounded-md" ref="contentTarget"
-                :style="contentStyle">
+            <div v-show="isVisible" class="absolute p-1 z-20 bg-white dark:bg-zinc-900 border 
+            dark:border-zinc-700 rounded-md" ref="contentTarget" :style="contentStyle">
                 <slot />
             </div>
         </transition>

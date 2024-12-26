@@ -5,11 +5,12 @@
             <m-svg-icon name="search" color="#707070"
                 class="w-1.5 h-1.5 absolute translate-y-[-50%] top-[50%] left-2"></m-svg-icon>
             <!-- 输入框 -->
-            <input class="block w-full h-[44px] pl-4 outline-0 bg-zinc-100 caret-zinc-400 
-                rounded-xl text-zinc-900 tracking-wide font-semibold border text-xm border-zinc-100
-                focus:border-red-300 duration-500 group-hover:bg-white group-hover:border-zinc-200" placeholder="搜索"
-                type="text" v-model="inputValue" @keyup.enter="onSearchHandler" @focus="onFocusHandler"
-                @blur="onBlurHandler">
+            <input class="block w-full h-[44px] pl-4 text-xm outline-0 bg-zinc-100 dark:bg-zinc-800
+                 caret-zinc-400 rounded-xl text-zinc-900 dark:text-zinc-200 tracking-wide 
+                 font-semibold border border-zinc-100 dark:border-zinc-700 duration-500 group-hover:bg-white
+                dark:group-hover:bg-zinc-900 group-hover:border-zinc-200 dark:group-hover:border-zinc-700
+                 focus:border-red-300" placeholder="搜索" type="text" v-model="inputValue" @keyup.enter="onSearchHandler"
+                @focus="onFocusHandler" @blur="onBlurHandler">
             <!-- 删除按钮 -->
             <m-svg-icon v-if="inputValue" name="input-delete" @click="onClearClick"
                 class="h-1.5 w-1.5 absolute translate-y-[-50%] top-[50%] right-9 cursor-pointer duration-500">
@@ -25,8 +26,10 @@
         </div>
         <!-- 下拉区 -->
         <transition name="slide">
-            <div v-if="$slots.dropdown" v-show="isFocus" class="max-h-[368px] w-full text-base overflow-auto bg-white absolute 
-            z-20 left-0 top-[56px] p-2 rounded border border-zinc-200 duration-200 hover:shadow-2xl">
+            <div v-if="$slots.dropdown" v-show="isFocus" class="max-h-[368px] w-full text-base overflow-auto bg-white
+                 dark:bg-zinc-800  absolute z-20 left-0 top-[56px] p-2 rounded border border-zinc-200
+                 dark:border-zinc-600 duration-200 hover:shadow-3xl scrollbar-thin 
+                 scrollbar-thumb-zinc-200 dark:scrollbar-thumb-zinc-900 scrollbar-track-transparent">
                 <slot name="dropdown" />
             </div>
         </transition>
