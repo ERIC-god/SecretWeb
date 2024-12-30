@@ -10,7 +10,7 @@
                     left: item._style?.left + 'px',
                     top: item._style?.top + 'px'
                 }">
-                <slot :item="item" :width="columnWidth" :index="index"></slot>
+                <slot name="waterfall" :item="item" :width="columnWidth" :index="index"></slot>
             </div>
         </template>
         <!-- 加载中 -->

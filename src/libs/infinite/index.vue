@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useVModel, useIntersectionObserver } from '@vueuse/core';
 const props = defineProps({
     // 是否处于加载状态
@@ -36,16 +36,30 @@ const loading = useVModel(props)
 
 // 滚动的元素
 const loadingTarget = ref(null)
-useIntersectionObserver(loadingTarget, ([{ isIntersecting }],) => {
-    // 当加载更多的视图可见时, 同时loading为false,同时 数据尚未全部加载完
-    // 处理逻辑
-    if (isIntersecting && !loading.value && !props.isFinished) {
-        // 修改加载数据标记
-        loading.value = true
-        // 触发加载更多行为 (本质就是自定义事件,绑定onload事件的会收到触发onload的参数)
-        emits('onload')
-    }
+const targetIsIntersection = ref(false)
+const { stop } = useIntersectionObserver(loadingTarget, ([{ isIntersecting }],) => {
+    targetIsIntersection.value = isIntersecting
+    emitLoad()
 })
+/**
+ *  触发load事件
+ */
+const emitLoad = () => {
+    setTimeout(() => {
+        // 当加载更多的视图可见时, 同时loading为false,同时 数据尚未全部加载完
+        // 处理逻辑
+        if (targetIsIntersection.value && !loading.value && !props.isFinished) {
+            // 修改加载数据标记
+            loading.value = true
+            // 触发加载更多行为 (本质就是自定义事件,绑定onload事件的会收到触发onload的参数)
+            emits('onload')
+        }
+    }, 50)
+}
+
+watch(loading, emitLoad)
+
+
 </script>
 
 <style lang="scss" scoped></style>

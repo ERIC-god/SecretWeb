@@ -8,7 +8,6 @@ export const useThemeStore = defineStore(
     const ChangeThemeType = (newTheme) => {
       themeType.value = newTheme.icon;
     };
-
     return {
       themeType,
       ChangeThemeType,

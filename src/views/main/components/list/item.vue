@@ -1,6 +1,6 @@
 <template>
     <div class="bg-white dark:bg-zinc-900 xl:dark:bg-zinc-800 rounded pb-1">
-        <div class="relative w-full rounded cursor-zoom-in group">
+        <div class="relative w-full rounded cursor-zoom-in group" :style="{ backgroundColor: randomRGB() }">
             <!-- 图片 -->
             <img class="w-full rounded bg-transparent" :src="data.photo" alt=""
                 :style="{ height: (width / data.photoWidth) * data.photoHeight + 'px ' }">
@@ -31,6 +31,7 @@
 </template>
 
 <script setup>
+import { randomRGB } from '../../../../utils/color';
 const props = defineProps({
     data: {
         type: Object,
