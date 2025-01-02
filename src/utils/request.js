@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useUserStore } from "../store/modules/user";
 
 const service = axios.create({
   // 根据项目的状态，自动切换请求的服务地址
@@ -7,8 +8,23 @@ const service = axios.create({
 });
 
 /**
+ *  请求拦截器  是在请求发送前的处理
+ */
+service.interceptors.request.use(
+  (config) => {
+    const userStore = useUserStore();
+    config.headers.Authorization = `Bearer ${userStore.token}`;
+    // return 出的对象, 就是请求的配置对象
+    return config;
+  },
+  (err) => {
+    return Promise.reject(err);
+  }
+);
+
+/**
  * 响应拦截器：
- * 服务端返回数据之后， .then之前被调用
+ * 服务端返回数据之后，!!!! .then之前被调用
  */
 
 service.interceptors.response.use(
@@ -21,7 +37,16 @@ service.interceptors.response.use(
     return Promise.reject(new Error(message));
   },
   (err) => {
-    return err;
+    // 处理 token 超时
+    if (
+      error.response &&
+      error.response.data &&
+      error.response.data.code === 401
+    ) {
+      // 退出
+      userStore.userLogout();
+    }
+    return Promise.reject(err);
   }
 );
 

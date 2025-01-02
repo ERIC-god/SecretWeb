@@ -20,6 +20,8 @@
 <script setup>
 import { useSearchStore } from '@/store/modules/search';
 import { onUpdated, ref } from 'vue';
+import { confirm } from '@/libs';
+
 
 // 双向绑定 v-model
 const props = defineProps({
@@ -37,7 +39,13 @@ searchList.value = searchStore.searchList
  *  删除全部
  */
 const onDeleteAllClick = () => {
-    searchStore.allItemDelete()
+    confirm('标题', '你要删除所有记录吗', 'No!!', 'Yes!!')
+        .then(() => {
+            searchStore.allItemDelete()
+        })
+        .catch(() => {
+            console.log('点击了No!!');
+        })
     searchList.value = searchStore.searchList
 }
 

@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { getPexlesList } from "@/api/pexels";
 import { ref } from "vue";
 
 export const useSearchStore = defineStore(
@@ -32,7 +33,7 @@ export const useSearchStore = defineStore(
     /**
      *  触发搜索事件
      */
-    const itemSearch = (item) => {
+    const itemSearch = async (item) => {
       searchList.value = searchList.value.filter((listItem) => {
         return listItem !== item;
       });

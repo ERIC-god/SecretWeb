@@ -5,7 +5,10 @@
                 <div>
                     <!-- 搜索提示 -->
                     <hint-vue :searchText="inputValue" v-if="inputValue" @itemClick="onSearchHandler"></hint-vue>
-                    <history-Vue v-show="!inputValue" v-model="inputValue"></history-Vue>
+                    <!-- 搜索历史 -->
+                    <history-vue v-show="!inputValue" v-model="inputValue"></history-vue>
+                    <!-- 主题推荐 -->
+                    <theme-vue></theme-vue>
                 </div>
             </template>
         </m-search>
@@ -16,6 +19,8 @@
 import { ref } from 'vue';
 import hintVue from './hint.vue';
 import historyVue from './history.vue';
+import themeVue from './theme.vue';
+
 
 /**
  *  初始化 useSearchStore
@@ -34,6 +39,7 @@ const onSearchHandler = (value) => {
     inputValue.value = value
     searchStore.itemSearch(value)
 }
+
 
 </script>
 

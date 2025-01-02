@@ -26,7 +26,10 @@ export default {
         main: "#f44c58",
         "hover-main": "$f32836",
       },
+      variants: {
+        scrollBar: ["dark"],
+      },
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar")],
 };

@@ -19,3 +19,19 @@ export const getHint = (q) => {
     params: { q },
   });
 };
+
+/**
+ *  获取推荐主题
+ */
+export const getThemes = () => {
+  return request({ url: "/pexels/themes" });
+};
+
+/**
+ *  获取指定图片详情
+ */
+export const getPexlesFromId = (id) => {
+  return request({
+    url: `/pexels/${id}`,
+  });
+};

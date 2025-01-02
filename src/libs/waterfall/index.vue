@@ -66,8 +66,7 @@ const useColumnHeightObj = () => {
     for (let i = 0; i < props.column; i++) {
         columnHeightObj.value[i] = 0
     }
-    console.log(columnHeightObj);
-
+    // console.log(columnHeightObj);
 }
 
 // 容器实例
