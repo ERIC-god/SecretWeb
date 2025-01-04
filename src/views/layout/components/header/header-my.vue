@@ -77,6 +77,9 @@ const onClickItem = (item) => {
             userStore.userLogout()
         })
     }
+    if (item.id === 0) {
+        router.push('/profile')
+    }
 }
 
 </script>

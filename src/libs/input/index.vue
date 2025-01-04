@@ -11,17 +11,15 @@
     <!-- 多行 textarea -->
     <div v-else class="text-xm h-8 w-48 relative">
         <textarea :value="modelValue" @input="onInputHandler" name="" id="" :maxlength="max"
-            class="h-full w-full outline-none"></textarea>
+            class="h-full w-full outline-none resize-none"></textarea>
         <!-- 字数限制 -->
         <span class="absolute right-0 bottom-0 " :class="{ 'text-red-600': modelValue.length >= max }">{{
             modelValue.length
-        }}/20</span>
+        }}/{{ max }}</span>
     </div>
 </template>
 
 <script setup>
-
-import { ref } from 'vue';
 const props = defineProps({
     // 双向数据绑定
     modelValue: {

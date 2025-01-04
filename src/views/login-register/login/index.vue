@@ -40,7 +40,7 @@
                 <!-- 微信和qq图标 -->
                 <div class="relative w-full h-12 ">
                     <!-- QQ -->
-                    <m-svg-icon class="w-4 cursor-pointer absolute top-[-4px] left-12" name="qq"></m-svg-icon>
+                    <qq-login-vue></qq-login-vue>
                     <!-- 微信 -->
                     <m-svg-icon class="w-4 cursor-pointer absolute top-[-4px] right-12" name="wexin"></m-svg-icon>
                 </div>
@@ -56,6 +56,7 @@ import { ref } from 'vue';
 import sliderCaptchaVue from './slider-captcha.vue';
 import { useUserStore } from '@/store/modules/user';
 import { useRouter } from 'vue-router';
+import qqLoginVue from './qq-login.vue';
 // 初始化 useUserStore
 const userStore = useUserStore()
 
