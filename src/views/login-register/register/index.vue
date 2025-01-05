@@ -52,7 +52,7 @@
 import { ref, watch } from 'vue';
 import sliderCaptchaVue from '../login/slider-captcha.vue';
 import { useUserStore } from '@/store/modules/user';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 const text = ref('')
 watch(() => text.value, (val) => {
     console.log(val);
@@ -62,6 +62,9 @@ const userStore = useUserStore()
 
 // 初始化 useRouter
 const router = useRouter()
+
+// 初始化 useRoute
+const route = useRoute()
 
 // 控制 sliderCaptcha 展示
 const sliderCaptcha = ref(false)
@@ -89,14 +92,14 @@ const onSuccessHandler = () => {
  */
 const loading = ref(false)
 const registerForm = ref({
-    username: 'qweqwe123123',
-    password: '123456'
+    username: '',
+    password: ''
 })
 const onRegister = async () => {
     loading.value = true
     try {
         // 注册
-        await userStore.userRegister(registerForm.value)
+        await userStore.userRegister(registerForm.value, ...route.query)
         // 注册完成 直接触发登录 去拿到token
         await userStore.userLogin({ ...registerForm.value, loginType: 'username' })
     }

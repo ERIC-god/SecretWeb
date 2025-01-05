@@ -9,13 +9,12 @@
 // QQ 登录的 URL
 const QQ_LOGIN_URL =
     'https://graph.qq.com/oauth2.0/authorize?client_id=101998494&response_type=token&scope=all&redirect_uri=https%3A%2F%2Fimooc-front.lgdsunday.club%2Flogin'
-const LOGIN_TYPE_QQ = 'LOGIN_TYPE_QQ'
 </script>
 
 <script setup>
 import { onMounted } from 'vue'
-// import brodacast from './brodacast'
-// import { oauthLogin } from './oauth'
+import { sendBoardcast, clearBoardcast, waitBoardcast } from './boardcast';
+import { oauthLogin } from './oauth.js'
 
 
 // QQ 登录挂起
@@ -29,7 +28,7 @@ onMounted(() => {
         (data, opts) => {
             console.log('QQ登录成功')
             // 1. 注销登录，否则在后续登录中会直接触发该回调
-            QC.Login.signOut()
+            // QC.Login.signOut()
             // 2. 获取当前用户唯一标识，作为判断用户是否已注册的依据
             const accessToken = /access_token=((.*))&expires_in/.exec(
                 window.location.hash
@@ -41,13 +40,13 @@ onMounted(() => {
                 accessToken
             }
             // 4. 完成跨页面传输
-            brodacast.send(oauthObj)
+            sendBoardcast(oauthObj)
 
             // 针对于 移动端而言：通过移动端触发 QQ 登录会展示三个页面，原页面、QQ 吊起页面、回调页面。
             // 并且移动端一个页面展示整屏内容，且无法直接通过 window.close() 关闭，所以在移动端中，我们需要在当前页面继续进行后续操作。
-            oauthLogin(LOGIN_TYPE_QQ, oauthObj)
+            // oauthLogin(LOGIN_TYPE_QQ, oauthObj)
             // 5. 在 PC 端下，关闭第三方窗口
-            window.close()
+            // window.close()
         }
     )
 })
@@ -69,11 +68,12 @@ const openQQWindow = async () => {
         'height=525,width=585, toolbar=no, menubar=no, scrollbars=no, status=no, location=yes, resizable=yes'
     )
     // 打开视窗之后开始等待
-    brodacast.wait().then(async (oauthObj) => {
+    waitBoardcast().then((oauthObj) => {
+        console.log(oauthObj);
         // 登录成功,关闭通知
-        brodacast.clear()
+        // clearBoardcast()
         // 执行登录操作
-        oauthLogin(LOGIN_TYPE_QQ, oauthObj)
+        oauthLogin('QQ', oauthObj)
     })
 }
 </script>

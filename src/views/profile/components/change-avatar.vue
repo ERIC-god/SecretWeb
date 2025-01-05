@@ -1,17 +1,17 @@
 <template>
-    <div class="overflow-auto relative flex flex-col items-center">
+    <div class="overflow-hidden relative flex flex-col items-center">
         <m-svg-icon v-if="isMobileTerminal" name="close" class="w-3 h-3 p-0.5 m-1 ml-auto"
             fillClass="fill-zinc-900 dark:fill-zinc-200 " @click="close">
         </m-svg-icon>
-        <img class="" ref="imageTarget" :src="blob" />
+        <img class="" ref="imageTarget" :src="imageSrc" />
         <!-- 按钮 -->
-        <div class="flex justify-end" v-if="cancelHandler || confirmHandler">
+        <div class="flex justify-end translate-y-[4px]">
             <m-button type="info" class="mr-2" @click="onCancelClick">{{
                 cancelText
-            }}</m-button>
+                }}</m-button>
             <m-button type="primary" @click="onConfirmClick">{{
                 confirmText
-            }}</m-button>
+                }}</m-button>
         </div>
     </div>
 </template>
@@ -41,8 +41,16 @@ const pcOptions = {
 <script setup>
 import { isMobileTerminal } from '@/utils/flexible.js'
 import { ref, onMounted } from 'vue';
+import { getOSSClient } from '@/utils/sts';
+import { useUserStore } from '@/store/modules/user.js'
+import { putProfile } from '../../../api/sys';
 import Cropper from 'cropperjs'
 import 'cropperjs/dist/cropper.css'
+
+// 初始化useUserStore
+const userStore = useUserStore()
+
+
 
 const props = defineProps({
     // blob对象 
@@ -74,6 +82,8 @@ const props = defineProps({
     }
 })
 
+// 图片src
+const imageSrc = ref(props.blob)
 
 const emits = defineEmits(['close'])
 
@@ -101,8 +111,45 @@ const onConfirmClick = () => {
     if (props.confirmHandler) {
         props.confirmHandler()
     }
+    // 拿到裁剪后的图片
+    cropper.getCroppedCanvas().toBlob((blob) => {
+        // const urlBlob = URL.createObjectURL(blob)
+        // console.log(urlBlob);
+        putObjectToOSS(blob)
+    })
     emits('close')
 }
+
+/**
+ *  进行OSS上传
+ */
+let ossClient
+const putObjectToOSS = async (file) => {
+    // 找出上传图片的type
+    const fileTypeArr = file.type.split('/')
+    const type = fileTypeArr[fileTypeArr.length - 1]
+    // 用户名(userName)+时间戳(Date.now())+文件类型(png)
+    const fileName = `${userStore.userInfo.userName}/${Date.now()}.${type}`
+    if (!ossClient) {
+        ossClient = await getOSSClient()
+    }
+    try {
+        // 1.存放的路径(包含名称)
+        const res = await ossClient.put(`images/${fileName}`, file)
+        // 2.发送请求更新头像
+        putProfile({
+            ...userStore.userInfo,
+            avatar: res.url
+        })
+        // 3.更新userstore本地用户信息
+        userStore.userInfo.avatar = res.url
+
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+
 
 /**
  * 取消按钮点击事件
@@ -113,7 +160,6 @@ const onCancelClick = () => {
     }
     emits('close')
 }
-
 
 
 

@@ -1,53 +1,57 @@
-import { defineStore } from "pinia";
-import { loginUser } from "@/api/sys";
-import { getProfile } from "../../api/sys";
-import { registerUser } from "../../api/sys";
-import md5 from "md5";
-import { ref } from "vue";
+import { defineStore } from 'pinia'
+import { loginUser } from '@/api/sys'
+import { getProfile } from '../../api/sys'
+import { registerUser } from '../../api/sys'
+import md5 from 'md5'
+import { ref } from 'vue'
+// 在js中这样引入
+import router from '@/router'
+// 在vue组件中这样引入
+// import { useRouter } from 'vue-router'
 
 export const useUserStore = defineStore(
-  "user",
+  'user',
   () => {
     // 保存token
-    const token = ref("");
+    const token = ref('')
     // 保存用户信息
-    const userInfo = ref({});
+    const userInfo = ref({})
     /**
      *   登录
      */
     const userLogin = async (data) => {
-      const { password } = data;
-      const newData = { ...data, password: password ? md5(password) : "" };
-      const res = await loginUser(newData);
-      token.value = res.token;
-    };
+      const { password } = data
+      const newData = { ...data, password: password ? md5(password) : '' }
+      const res = await loginUser(newData)
+      token.value = res.token
+    }
     /**
      *  获取用户信息
      */
     const userProfile = async () => {
-      const res = await getProfile();
-      userInfo.value = res;
-    };
+      const res = await getProfile()
+      userInfo.value = res
+    }
     /**
      *  退出登录
      */
     const userLogout = () => {
       // 1.清空token
-      token.value = "";
+      token.value = ''
       // 2.清空用户信息
-      userInfo.value = {};
+      userInfo.value = {}
       // 3.跳转页面
-      location.reload();
-    };
+      router.push('/login')
+    }
 
     /**
      *  注册
      */
     const userRegister = async (data) => {
-      const { password } = data;
-      const newData = { ...data, password: password ? md5(password) : "" };
-      const res = await registerUser(newData);
-    };
+      const { password } = data
+      const newData = { ...data, password: password ? md5(password) : '' }
+      const res = await registerUser(newData)
+    }
 
     return {
       token,
@@ -56,7 +60,7 @@ export const useUserStore = defineStore(
       userProfile,
       userLogout,
       userRegister,
-    };
+    }
   },
   { persist: true }
-);
+)
