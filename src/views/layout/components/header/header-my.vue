@@ -80,6 +80,9 @@ const onClickItem = (item) => {
     if (item.id === 0) {
         router.push('/profile')
     }
+    if (item.id === 1) {
+        router.push('/member')
+    }
 }
 
 </script>
