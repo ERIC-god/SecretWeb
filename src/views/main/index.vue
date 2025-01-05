@@ -3,6 +3,7 @@
         <navigation-vue />
         <div class="max-w-screen-xl mx-auto relative m-1 xl:mt-4">
             <list-vue></list-vue>
+            >
         </div>
     </div>
 </template>

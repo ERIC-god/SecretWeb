@@ -8,7 +8,6 @@
                 </template>
             </m-waterfall>
         </m-infinite>
-
         <!-- 详情内容展示 -->
         <transition :css="false" @before-enter="beforeEnter" @enter="enter" @leave="leave">
             <pins-vue v-if="isVisiblePins" :id="currentPins.id"></pins-vue>

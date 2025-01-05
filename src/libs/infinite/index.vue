@@ -3,6 +3,8 @@
         <!-- 内容    -->
         <slot></slot>
         <div ref="loadingTarget" class="h-6 py-4">
+            <!-- 移动端悬浮球 -->
+            <m-floatball></m-floatball>
             <!-- 加载更多 -->
             <m-svg-icon v-show="loading" class="w-4 h-4 mx-auto animate-spin" name="infinite-load"></m-svg-icon>
             <!-- 没有更多数据 -->
