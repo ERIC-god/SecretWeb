@@ -20,12 +20,20 @@ import { ref } from 'vue';
 import hintVue from './hint.vue';
 import historyVue from './history.vue';
 import themeVue from './theme.vue';
+import { useSearchStore } from '@/store/modules/search';
+import { useCategoryStore } from '@/store/modules/category';
 
+
+/**
+ *  初始化 useCategoryStore
+ */
+
+const categoryStore = useCategoryStore()
 
 /**
  *  初始化 useSearchStore
  */
-import { useSearchStore } from '@/store/modules/search';
+
 const searchStore = useSearchStore()
 
 // 输入的value
@@ -33,11 +41,12 @@ const inputValue = ref('')
 
 
 /**
- *  执行 @seacrch的回调
+ *  执行 @search的回调
  */
 const onSearchHandler = (value) => {
     inputValue.value = value
     searchStore.itemSearch(value)
+    categoryStore.toggleSearchText(value)
 }
 
 

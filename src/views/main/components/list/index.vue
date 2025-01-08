@@ -1,7 +1,7 @@
 <template>
     <div>
         <m-infinite v-model="loading" :isFinished="isFinished" @onload="getPexlesData">
-            <m-waterfall :class="{ 'px-1': isMobileTerminal }" :data="pexelsList" nodeKey="id"
+            <m-waterfall :class="{ 'px-1': isMobileTerminal }" :data="categoryStore.listData" nodeKey="id"
                 :column="isMobileTerminal ? 2 : 4" :picturePreloading="false">
                 <template #waterfall="{ item, width }">
                     <item-vue :data="item" :width="width" @click="onToPins"></item-vue>
@@ -29,13 +29,6 @@ import { useCategoryStore } from '@/store/modules/category';
 // 初始化useCategoryStore
 const categoryStore = useCategoryStore()
 
-/**
- *  构建数据请求
- */
-let query = {
-    page: 1,
-    size: 20
-}
 
 /**
  *  与m-infinite组件的交互
@@ -47,17 +40,15 @@ const isFinished = ref(false)
 /**
  *  请求数据
  */
-const pexelsList = ref([])
 const getPexlesData = async () => {
     if (isFinished.value) {
         return
     }
     const res = await getPexlesList(categoryStore.currentCategoryQuery)
     categoryStore.currentCategoryQuery.page += 1
-    pexelsList.value.push(...res.list)
-    categoryStore.listData = pexelsList.value
+    categoryStore.listData.push(...res.list)
 
-    if (pexelsList.value.length === res.total) {
+    if (categoryStore.listData.length === res.total) {
         isFinished.value = true
     }
     loading.value = false
@@ -66,11 +57,11 @@ const getPexlesData = async () => {
 watch(() => categoryStore.currentCategoryQuery.categoryId, () => {
     // 当 监听到 categoryId 切换时候，把listData数据清空
     categoryStore.listData = []
-    pexelsList.value = []
     // 把 请求页 变回1
     categoryStore.currentCategoryQuery.page = 1
     getPexlesData()
 }, { deep: true })
+
 
 
 // 控制pins 展示

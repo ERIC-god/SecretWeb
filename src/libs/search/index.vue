@@ -88,7 +88,7 @@ const inputValue = useVModel(props)
  */
 
 watch(inputValue, (val) => {
-    emits(EMIT_INPUT, 'val')
+    emits(EMIT_INPUT, val)
 })
 
 

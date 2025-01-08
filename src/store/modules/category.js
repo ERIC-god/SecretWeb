@@ -10,9 +10,21 @@ export const useCategoryStore = defineStore('category', () => {
     categoryId: '',
     searchText: '',
   })
-  // navigation的category 被切换时候 调用此方法
-  const toggleListData = (id) => {
+
+  // navigation的 searchText 被搜索时候 ，调用此方法
+  const toggleSearchText = (text) => {
+    currentCategoryQuery.value.searchText = text
+    toggleListData()
+  }
+
+  // navigation的categoryId 被切换时候 调用此方法
+  const toggleCategoryId = (id) => {
     currentCategoryQuery.value.categoryId = id
+    toggleListData()
+  }
+
+  // navigation的category 被切换时候 调用此方法
+  const toggleListData = () => {
     getPexlesList(currentCategoryQuery.value)
       .then((result) => {
         console.log(result.list)
@@ -22,9 +34,12 @@ export const useCategoryStore = defineStore('category', () => {
         console.log(err)
       })
   }
+
   return {
     listData,
     currentCategoryQuery,
+    toggleSearchText,
+    toggleCategoryId,
     toggleListData,
   }
 })

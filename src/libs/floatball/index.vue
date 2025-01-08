@@ -1,6 +1,6 @@
 <template>
     <transition name='fade'>
-        <div v-if="isMobileTerminal" class="fixed top-[600px] left-[50%] translate-x-[-50%] rounded-full duration-300
+        <div v-if="isMobileTerminal" class="fixed top-[80vh] left-[50%] translate-x-[-50%] rounded-full duration-300
         h-6 w-6 flex bg-zinc-200 dark:bg-zinc-700" :class="{ 'w-[200px]': isExpanded }">
             <!-- 左方登录按钮 -->
             <m-svg-icon name="profile" v-if="isExpanded"

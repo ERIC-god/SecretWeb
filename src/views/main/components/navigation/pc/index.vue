@@ -53,7 +53,7 @@ const onItemClick = (item, index) => {
     currentCategoryIndex.value = index
 
 
-    categoryStore.toggleListData(item.id)
+    categoryStore.toggleCategoryId(item.id)
 }
 
 </script>
