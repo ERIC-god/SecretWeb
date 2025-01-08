@@ -14,8 +14,8 @@
         hover:bg-zinc-200 absolute right-2 top-2" fillClass="fill-zinc-400" @click="onPop"></m-svg-icon>
         <!-- 内容区 -->
         <div class="xl:w-[80%] xl:h-full xl:mx-auto xl:rounded-lg xl:flex">
-            <img src="https://images.pexels.com/photos/8051987/pexels-photo-8051987.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                alt="" class="w-screen mb-2 xl:w-3/5 xl:h-full xl:rounded-tl-lg xl:rounded-bl-lg">
+            <img :src="pexelsData.photo" alt=""
+                class="w-screen mb-2 xl:w-3/5 xl:h-full xl:rounded-tl-lg xl:rounded-bl-lg">
             <div class="xl:w-2/5 xl:h-full xl:bg-white xl:dark:bg-zinc-900 xl:rounded-tr-lg xl:rounded-br-lg
             xl:p-3 ">
                 <!-- PC端下的 收藏分享 -->
@@ -53,6 +53,7 @@ const props = defineProps({
 const pexelsData = ref({})
 const getPexlesData = async () => {
     const res = await getPexlesFromId(props.id)
+    // console.log(res);
     pexelsData.value = res
 }
 onMounted(() => {

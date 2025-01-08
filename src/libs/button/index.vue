@@ -118,7 +118,9 @@ const sizeKey = computed(() => {
 })
 
 // 处理 点击事件
-const onBtnClick = () => {
+const onBtnClick = (e) => {
+    // 阻止冒泡，防止点击全屏或分享等按钮时候导致进入详情页
+    e.stopPropagation()
     if (props.loading) return
     emits(EMITS_CLICK)
 }

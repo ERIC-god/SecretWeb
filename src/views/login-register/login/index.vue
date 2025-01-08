@@ -89,8 +89,8 @@ const onSuccessHandler = () => {
  */
 const loading = ref(false)
 const loginForm = ref({
-    username: 'LGD_Sunday',
-    password: '123123'
+    username: '',
+    password: ''
 })
 const onLogin = async () => {
     loading.value = true

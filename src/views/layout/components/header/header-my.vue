@@ -12,8 +12,8 @@
                 <!-- vip -->
                 <m-svg-icon name="vip" class="h-1.5 w-1.5 absolute right-[16px] bottom-0"></m-svg-icon>
             </div>
-            <div v-else @click="onToLogin">
-                <m-button icon="profile" iconColor="black" type="info"></m-button>
+            <div v-else>
+                <m-button icon="profile" iconColor="black" type="info" @click="onToLogin"></m-button>
             </div>
         </template>
         <!-- 匿名插槽：弹出层视图中展示的内容 -->

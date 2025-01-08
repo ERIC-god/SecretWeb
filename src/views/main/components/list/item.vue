@@ -14,10 +14,10 @@
                 <m-button class="absolute top-1.5 right-1.5" type="info" icon="heart"
                     iconClass="fill-zinc-900 dark:fill-zinc-200"></m-button>
                 <!-- 下载 -->
-                <m-button class="absolute bottom-1.5 left-1.5 bg-zinc-100/70" type="info" icon="download" size="small"
+                <m-button class="absolute bottom-1.5 left-1.5 bg-zinc-100/70" type="info" icon="download" size="default"
                     iconClass="fill-zinc-900 dark:fill-zinc-200" @click="onDownload"></m-button>
                 <!-- 全屏 -->
-                <m-button class="absolute bottom-1.5 right-1.5 bg-zinc-100/70" type="info" icon="full" size="small"
+                <m-button class="absolute bottom-1.5 right-1.5 bg-zinc-100/70" type="info" icon="full" size="default"
                     iconClass="fill-zinc-900 dark:fill-zinc-200" @click="onImgFullScreen"></m-button>
             </div>
         </div>
@@ -32,7 +32,7 @@
 </template>
 
 <script setup>
-import { nextTick, computed, ref } from 'vue';
+import { computed, ref } from 'vue';
 import { randomRGB } from '@/utils/color';
 import { saveAs } from 'file-saver'
 import { useFullscreen } from '@vueuse/core'
@@ -54,7 +54,7 @@ const emits = defineEmits(['click'])
  *  下载点击事件
  */
 const onDownload = () => {
-    console.log(props.data);
+    // console.log(props.data);
 
     /**
      *  下载的图片链接
@@ -66,7 +66,9 @@ const onDownload = () => {
  *  生成全屏的方法
  */
 const imgTarget = ref(null)
-const { enter: onImgFullScreen } = useFullscreen(imgTarget)
+const { enter: onImgFullScreen } = useFullscreen(imgTarget, {
+    autoExit: true,
+})
 
 
 /**

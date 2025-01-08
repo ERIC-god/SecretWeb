@@ -9,7 +9,7 @@
                     fillClass="fill-zinc-900 dark:fill-zinc-300"></m-svg-icon>
             </div>
             <!-- 列表 -->
-            <li v-for="(item, index) in data" :key="item.id" @click="onItemClick(index)" class="shrink-0 px-1.5 
+            <li v-for="(item, index) in data" :key="item.id" @click="onItemClick(item, index)" class="shrink-0 px-1.5 
             py-0 z-10 duration-200  text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-300 
             text-base font-bold h-4 leading-4 cursor-pointer hover:bg-zinc-200 dark:hover:bg-zinc-900
             rounded mr-1 mb-1"
@@ -22,6 +22,13 @@
 
 <script setup>
 import { ref } from 'vue';
+import { getPexlesList } from '@/api/pexels';
+import { useCategoryStore } from '@/store/modules/category';
+
+// 初始化useCategoryStore
+const categoryStore = useCategoryStore()
+
+
 const props = defineProps({
     data: {
         type: Object,
@@ -41,8 +48,12 @@ const triggerState = () => {
  *  选中状态处理
  */
 const currentCategoryIndex = ref(0)
-const onItemClick = (index) => {
+const onItemClick = (item, index) => {
+    // 切换当前的index
     currentCategoryIndex.value = index
+
+
+    categoryStore.toggleListData(item.id)
 }
 
 </script>

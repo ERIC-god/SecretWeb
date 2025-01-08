@@ -37,7 +37,7 @@ const userStore = useUserStore()
 const isExpanded = ref(false)
 
 // 控制 浅色深色模式
-const isThemeLight = ref(true)
+const isThemeLight = ref(themeStore.themeType === 'theme-light' ? true : false)
 
 // 处理 floatBall 点击事件
 const onFloatFallClick = () => {

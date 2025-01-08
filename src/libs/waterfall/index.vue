@@ -109,12 +109,14 @@ onMounted(() => {
     useColumnWidth()
 })
 
+
+
 // item 高度集合
 let itemHeights = []
 /**
  *  监听图片加载完成 (需要图片预加载)
  */
-const waitImgComplete = () => {
+const waitImgComplete = async () => {
     itemHeights = []
     // 拿到 所有的元素
     let itemElements = [...document.querySelectorAll('.m-waterfall-item')]
@@ -131,8 +133,7 @@ const waitImgComplete = () => {
     // 获取 所有img标签 的图片
     const allImgs = getAllImg(imgElements)
     // 等待图片加载完成
-    onCompleteImgs(allImgs).then(() => {
-
+    await onCompleteImgs(allImgs).then(() => {
         itemElements.forEach(item => {
             itemHeights.push(item.offsetHeight)
         })
@@ -144,6 +145,7 @@ const waitImgComplete = () => {
  *   不需要图片预加载
  */
 const useItemHeight = () => {
+    itemHeights = []
     // 拿到所有的元素 
     let itemElements = [...document.querySelectorAll('.m-waterfall-item')]
     // 计算 item 高度
@@ -237,11 +239,31 @@ watch(() => props.data, (newVal) => {
 
 
 /**
- *  监听列数的变化
+ * 监听列数变化，重新构建瀑布流
  */
-watch(() => props.column, () => {
-
-})
+const reset = () => {
+    setTimeout(() => {
+        // 重新计算列宽
+        useColumnWidth()
+        // 重置所有的定位数据，因为 data 中进行了深度监听，所以该操作会触发 data 的 watch
+        props.data.forEach((item) => {
+            item._style = null
+        })
+    }, 100)
+}
+watch(
+    () => props.column,
+    () => {
+        if (props.picturePreloading) {
+            // 在 picturePreReading 为 true 的前提下，需要首先为列宽滞空，列宽滞空之后，会取消瀑布流渲染
+            columnWidth.value = 0
+            // 等待页面渲染之后，重新执行计算。否则在 item 没有指定过高度的前提下，计算出的 item 高度会不正确
+            nextTick(reset())
+        } else {
+            reset()
+        }
+    }
+)
 
 
 </script>

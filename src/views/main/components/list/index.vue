@@ -12,28 +12,29 @@
         <transition :css="false" @before-enter="beforeEnter" @enter="enter" @leave="leave">
             <pins-vue v-if="isVisiblePins" :id="currentPins.id"></pins-vue>
         </transition>
+
     </div>
 </template>
 
 <script setup>
 import { getPexlesList } from '@/api/pexels';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import itemVue from './item.vue';
 import { isMobileTerminal } from '@/utils/flexible';
 import pinsVue from '../../../pins/components/pins.vue';
 import gsap from 'gsap'
 import { useEventListener } from '@vueuse/core';
-// 测试
-import { useUserStore } from '../../../../store/modules/user';
-const userStore = useUserStore()
-userStore.userProfile()
+import { useCategoryStore } from '@/store/modules/category';
+
+// 初始化useCategoryStore
+const categoryStore = useCategoryStore()
 
 /**
  *  构建数据请求
  */
 let query = {
     page: 1,
-    size: 10
+    size: 20
 }
 
 /**
@@ -51,17 +52,25 @@ const getPexlesData = async () => {
     if (isFinished.value) {
         return
     }
-
-    const res = await getPexlesList(query)
-    query.page += 1
+    const res = await getPexlesList(categoryStore.currentCategoryQuery)
+    categoryStore.currentCategoryQuery.page += 1
     pexelsList.value.push(...res.list)
-
+    categoryStore.listData = pexelsList.value
 
     if (pexelsList.value.length === res.total) {
         isFinished.value = true
     }
     loading.value = false
 }
+
+watch(() => categoryStore.currentCategoryQuery.categoryId, () => {
+    // 当 监听到 categoryId 切换时候，把listData数据清空
+    categoryStore.listData = []
+    pexelsList.value = []
+    // 把 请求页 变回1
+    categoryStore.currentCategoryQuery.page = 1
+    getPexlesData()
+}, { deep: true })
 
 
 // 控制pins 展示
