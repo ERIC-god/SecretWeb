@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-// import { getPexlesList } from "@/api/pexels";
 import { ref } from 'vue'
 
 export const useSearchStore = defineStore(

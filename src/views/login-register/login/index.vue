@@ -12,31 +12,45 @@
                     <span>Login</span>
                 </div>
                 <!-- 表单 -->
-                <form>
+                <Form @submit="onLoginHandler">
                     <!-- 用户名 -->
-                    <div class="flex items-center justify-center h-8 text-xl ">
-                        <div class="h-4 w-[80%] ">
-                            <input type="text" name="usename" placeholder="用户名" v-model="loginForm.username"
+                    <div class=" flex items-center justify-center h-8 text-xl ">
+                        <div class=" h-4 w-[80%] ">
+                            <Field type=" text" name="username" placeholder="用户名" v-model="loginForm.username"
+                                :rules="validateUsername"
                                 class="h-full w-full text-xm outline-0 bg-zinc-300 border-b border-b-zinc-400 ">
+                            </Field>
                         </div>
+
                     </div>
+                    <error-message class="text-xm text-red-600 absolute left-[10%] top-[28%]" name="username">
+                    </error-message>
+
                     <!-- 密码 -->
                     <div class="flex items-center justify-center h-8 text-xl ">
                         <div class="h-4 w-[80%] border-b ">
-                            <input type="password" name="password" placeholder="密码" v-model="loginForm.password"
+                            <Field type="password" name="password" placeholder="密码" v-model="loginForm.password"
+                                :rules="validatePassword"
                                 class="h-full w-full text-xm outline-0 bg-zinc-300 border-b border-b-zinc-400">
+                            </Field>
                         </div>
                     </div>
-                </form>
-                <!-- 去注册 -->
-                <div>
-                    <span class="text-zinc-500 text-xm absolute right-3 cursor-pointer" @click="onToReg">去注册</span>
-                </div>
-                <!-- 登录按钮 -->
-                <div class="w-full h-8  mt-3 flex items-center justify-center">
-                    <m-button icon="hacker" @click="onLoginHandler" class="text-zinc-200 text-xl h-4 w-32 bg-zinc-400 rounded 
+                    <error-message class="text-xm text-red-600   
+                    absolute left-[10%] top-[43%]" name="password">
+                    </error-message>
+                    <!-- 去注册 -->
+                    <div>
+                        <span @click="onToReg" class="text-zinc-500 text-xm absolute right-3 cursor-pointer">去注册</span>
+                    </div>
+                    <!-- 登录按钮 -->
+                    <div class="w-full h-8  mt-3 flex items-center justify-center">
+                        <m-button icon="hacker" class="text-zinc-200 text-xl h-4 w-32 bg-zinc-400 rounded 
                         hover:bg-zinc-600" :loading="loading"></m-button>
-                </div>
+                    </div>
+                </Form>
+
+
+
                 <!-- 微信和qq图标 -->
                 <div class="relative w-full h-12 ">
                     <!-- QQ -->
@@ -57,6 +71,9 @@ import sliderCaptchaVue from './slider-captcha.vue';
 import { useUserStore } from '@/store/modules/user';
 import { useRouter } from 'vue-router';
 import qqLoginVue from './qq-login.vue';
+import { message } from '@/libs/message';
+import { validateUsername, validatePassword } from '../validate.js';
+import { Form, Field, ErrorMessage } from 'vee-validate';
 // 初始化 useUserStore
 const userStore = useUserStore()
 
@@ -101,7 +118,7 @@ const onLogin = async () => {
         loading.value = false
     }
     router.push('/')
-
+    message('success', 'Login success!', 4000)
     userStore.userProfile()
 }
 

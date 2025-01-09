@@ -33,10 +33,10 @@
             <!-- 鼠标移入显示的弹层内容 -->
             <div class="w-[140px] overflow-hidden">
                 <div class="flex items-center p-1 cursor-pointer rounded hover:bg-zinc-100/60 
-                dark:hover:bg-zinc-800">
+                dark:hover:bg-zinc-800" @click="showWechat">
                     <m-svg-icon name="feedback" class="w-1.5 h-1.5 mr-1" fillClass="fill-zinc-900 dark:fill-zinc-300">
                     </m-svg-icon>
-                    <span class="text-zinc-800 dark:text-zinc-500 text-xm">立即吐槽</span>
+                    <span class="text-zinc-800 dark:text-zinc-500 text-xm">联系我</span>
                 </div>
             </div>
         </m-popover>
@@ -45,10 +45,15 @@
 
 <script setup>
 import pdfUrl from '@/assets/files/profile.pdf'
+import jpgUrl from '@/assets/files/profile.jpg'
 // 展示我的个人简介
 const showASecretMan = () => {
-
     window.open(pdfUrl)
+}
+
+// 展示我的个人微信
+const showWechat = () => {
+    window.open(jpgUrl)
 }
 
 </script>

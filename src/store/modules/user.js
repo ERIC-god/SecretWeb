@@ -4,6 +4,7 @@ import { getProfile } from '../../api/sys'
 import { registerUser } from '../../api/sys'
 import md5 from 'md5'
 import { ref } from 'vue'
+import { message } from '../../libs/message/index.js'
 // 在js中这样引入
 import router from '@/router'
 // 在vue组件中这样引入
@@ -42,6 +43,8 @@ export const useUserStore = defineStore(
       userInfo.value = {}
       // 3.跳转页面
       router.push('/login')
+      // 4.显示退出成功
+      message('success', 'Logout success!', 3000)
     }
 
     /**

@@ -99,6 +99,7 @@ import { useRouter } from 'vue-router'
 import { ref, watch } from 'vue'
 import changeAvatarVue from './components/change-avatar.vue'
 import { useUserStore } from '@/store/modules/user.js'
+import { message } from '../../libs/message'
 // 初始化 useUserStore
 const userStore = useUserStore()
 // 初始化 useRouter
@@ -159,12 +160,20 @@ const loading = ref(false)
 const onChangeProfile = () => {
     loading.value = true
     confirm('Are u want to change your profile？').then(async () => {
-        await putProfile(userInfo.value)
-        userStore.userInfo = userInfo.value
+        try {
+            await putProfile(userInfo.value)
+            userStore.userInfo = userInfo.value
+            // 成功后才显示成功消息
+            setTimeout(() => {
+                message('success', 'Update your Profile Success!', 3000)
+            }, 500)
+        } catch (error) {
+            // 失败时显示错误消息
+            message('error', error.message || 'Failed to update profile', 3000)
+        }
     }).finally(() => {
         loading.value = false
     })
-
 }
 
 /**
@@ -182,6 +191,7 @@ const onNavbarLeftClick = () => {
 const onLogoutClick = () => {
     confirm('确定要退出登录吗？').then(() => {
         userStore.userLogout()
+        message('success', 'Logout success!', 4000)
     })
 }
 </script>

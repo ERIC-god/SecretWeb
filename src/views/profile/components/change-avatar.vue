@@ -8,10 +8,10 @@
         <div class="flex justify-end translate-y-[4px]">
             <m-button type="info" class="mr-2" @click="onCancelClick">{{
                 cancelText
-                }}</m-button>
+            }}</m-button>
             <m-button type="primary" @click="onConfirmClick">{{
                 confirmText
-                }}</m-button>
+            }}</m-button>
         </div>
     </div>
 </template>
@@ -102,6 +102,7 @@ onMounted(() => {
         imageTarget.value,
         isMobileTerminal.value ? mobileOptions : pcOptions
     )
+
 })
 
 /**
