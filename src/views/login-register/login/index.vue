@@ -46,8 +46,8 @@
                     </div>
                     <!-- 登录按钮 -->
                     <div class="w-full h-8 mt-3 flex items-center justify-center">
-                        <m-button icon="hacker" class="text-zinc-200 text-xl h-4 w-12 dark:bg-zinc-500 rounded 
-                        hover:bg-zinc-600 bg-zinc-200" :loading="loading"></m-button>
+                        <m-button icon="hacker" class="!w-20 !text-zinc-200 !text-xl !h-4  dark:!bg-zinc-400 !rounded 
+                        hover:!bg-zinc-600 !bg-zinc-200" :loading="loading"></m-button>
                     </div>
                 </Form>
 

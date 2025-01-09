@@ -1,13 +1,15 @@
 <script setup>
+
 import { message } from './libs/message/index.js';
-message('success', 'Welcome Back！', 3000)
+message('success', 'Welcome！', 3000)
+
 
 </script>
 
 <template>
 
-  <!-- 一级路由出口 -->
 
+  <!-- 一级路由出口 -->
   <router-view></router-view>
 
 
