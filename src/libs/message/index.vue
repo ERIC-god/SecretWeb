@@ -1,7 +1,7 @@
 <template>
     <transition name="slide" @after-leave="destroy">
         <div v-show="isVisable"
-            class="min-w-[420px] fixed top-[20px] left-[50%] translate-x-[-50%] z-50 flex items-center px-3 py-1.5 rounded-sm border cursor-pointer"
+            class="min-w-[420px] fixed top-[7%] left-[50%] translate-x-[-50%] z-50 flex items-center px-3 py-1.5 rounded-sm border cursor-pointer"
             :class="styles[type].containerClass">
             <m-svg-icon :name="styles[type].icon" :fillClass="styles[type].fillClass"
                 class="h-1.5 w-1.5 mr-1.5"></m-svg-icon>
@@ -85,8 +85,8 @@ const styles = {
         icon: 'success',
         fillClass: 'fill-success-300',
         // textClass: 'text-success-300',
-        // containerClass:
-        //     'bg-success-100 border-success-200  hover:shadow-lg hover:shadow-success-100'
+        containerClass:
+            'bg-zinc-100 border-zinc-100  hover:shadow-lg'
     }
 }
 

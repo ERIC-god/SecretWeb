@@ -11,14 +11,14 @@
                 <m-svg-icon name="hamburger" class="w-1.5 h-1.5 " />
             </li>
             <!-- items -->
-            <li v-for="(item, index) in data" :key="item.id" :ref="setItemRef" @click="onItemClick(index)"
+            <li v-for="(item, index) in data" :key="item.id" :ref="setItemRef" @click="onItemClick(item, index)"
                 class="shrink-0 px-1.5 py-0.5 z-10 duration-200 last:mr-4"
                 :class="{ 'text-white': currentCategoryIndex === index }">
                 {{ item.name }}
             </li>
         </ul>
         <m-popup v-model="isVisible">
-            <menu-vue :categorys="data" @onItemClick="onItemClick"></menu-vue>
+            <menu-vue :categorys="data" @onClick="onItemClick"></menu-vue>
         </m-popup>
     </div>
     <!-- <div>
@@ -32,6 +32,10 @@
 import { onBeforeUpdate, ref, watch } from 'vue';
 import { useScroll } from '@vueuse/core';
 import MenuVue from '@/views/main/components/menu/index.vue'
+import { useCategoryStore } from '@/store/modules/category';
+
+// 初始化useCategoryStore
+const categoryStore = useCategoryStore()
 
 defineProps({
     data: {
@@ -78,9 +82,10 @@ watch(currentCategoryIndex, (val) => {
 })
 
 // item 点击事件
-const onItemClick = (index) => {
+const onItemClick = (item, index) => {
     currentCategoryIndex.value = index
     isVisible.value = false
+    categoryStore.toggleCategoryId(item.id)
 }
 
 //控制popup展示

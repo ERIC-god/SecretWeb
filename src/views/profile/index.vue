@@ -1,7 +1,7 @@
 <template>
-    <div class="h-[665px] bg-zinc-200 dark:bg-zinc-800 duration-400 overflow-auto xl:pt-1">
+    <div class="h-screen  bg-zinc-200 dark:bg-zinc-800 duration-400 xl:pt-1">
         <div
-            class="relative top-3 max-w-screen-lg mx-auto bg-white dark:bg-zinc-900 duration-400 xl:rounded-sm xl:border-zinc-200 xl:dark:border-zinc-600 xl:border-[1px] xl:px-4 xl:py-2">
+            class=" relative top-3 max-w-screen-lg mx-auto bg-white dark:bg-zinc-900 duration-400 xl:rounded-sm xl:border-zinc-200 xl:dark:border-zinc-600 xl:border-[1px] xl:px-4 xl:py-2">
             <!-- 移动端 navbar -->
             <m-navbar sticky v-if="isMobileTerminal" :clickLeft="onNavbarLeftClick">
                 个人资料
@@ -79,7 +79,7 @@
             <change-avatar-vue :blob="currentImgBlob" @close="isDialogVisible = false"></change-avatar-vue>
         </m-dialog>
         <!-- 移动端 -->
-        <m-popup v-else :class="{ 'h-screen': isDialogVisible }" v-model="isDialogVisible">
+        <m-popup v-else :class="{ 'h-[100%]': isDialogVisible }" v-model="isDialogVisible">
             <change-avatar-vue :blob="currentImgBlob" @close="isDialogVisible = false"></change-avatar-vue>
         </m-popup>
     </div>

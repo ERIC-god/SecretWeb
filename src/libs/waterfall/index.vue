@@ -14,7 +14,7 @@
             </div>
         </template>
         <!-- 加载中 -->
-        <div v-else>加载中</div>
+        <div v-else>Loading！</div>
     </div>
 </template>
 

@@ -1,9 +1,11 @@
 <template>
-    <div class="h-screen w-screen flex justify-center bg-zinc-700">
-        <div class="h-full w-[400px]  ">
+    <div class="h-screen w-screen flex justify-center  bg-zinc-700">
+        <div class="h-full w-[400px] xl:w-[30%]  ">
             <!-- 上方字体 -->
-            <div class="w-full h-16  flex items-center justify-center">
-                <span class="text-black">A Secret Man</span>
+            <div class="w-full h-16 relative flex items-center justify-center text-center">
+                <span class=" text-zinc-300 absolute top-[15%] xl:left-[5%]">Welcome To A Secret
+                    Man's
+                    WebSite</span>
             </div>
             <!-- 下方登录 -->
             <div class="w-full h-52 bg-zinc-300 rounded shadow-md relative">
@@ -43,9 +45,9 @@
                         <span @click="onToReg" class="text-zinc-500 text-xm absolute right-3 cursor-pointer">去注册</span>
                     </div>
                     <!-- 登录按钮 -->
-                    <div class="w-full h-8  mt-3 flex items-center justify-center">
-                        <m-button icon="hacker" class="text-zinc-200 text-xl h-4 w-32 bg-zinc-400 rounded 
-                        hover:bg-zinc-600" :loading="loading"></m-button>
+                    <div class="w-full h-8 mt-3 flex items-center justify-center">
+                        <m-button icon="hacker" class="text-zinc-200 text-xl h-4 w-12 dark:bg-zinc-500 rounded 
+                        hover:bg-zinc-600 bg-zinc-200" :loading="loading"></m-button>
                     </div>
                 </Form>
 
@@ -56,7 +58,8 @@
                     <!-- QQ -->
                     <qq-login-vue></qq-login-vue>
                     <!-- 微信 -->
-                    <m-svg-icon class="w-4 cursor-pointer absolute top-[-4px] right-12" name="wexin"></m-svg-icon>
+                    <m-svg-icon class="w-4 cursor-pointer absolute top-[-4px] right-12" name="wexin"
+                        @click="wechatLogin"></m-svg-icon>
                 </div>
             </div>
         </div>
@@ -74,6 +77,7 @@ import qqLoginVue from './qq-login.vue';
 import { message } from '@/libs/message';
 import { validateUsername, validatePassword } from '../validate.js';
 import { Form, Field, ErrorMessage } from 'vee-validate';
+
 // 初始化 useUserStore
 const userStore = useUserStore()
 
@@ -127,6 +131,13 @@ const onLogin = async () => {
  */
 const onToReg = () => {
     router.push('/register')
+}
+
+/**
+ *  微信登陆暂时不可用
+ */
+const wechatLogin = () => {
+    message('error', 'The Wechat Accession is Temporarily Unavailable')
 }
 
 </script>

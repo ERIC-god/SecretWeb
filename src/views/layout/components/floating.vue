@@ -4,9 +4,9 @@
         <m-popover class="flex items-center" placement="top-left">
             <!-- 触发弹层内容的图标 -->
             <template #reference>
-                <div class="w-4 h-4 mb-1 bg-white dark:bg-zinc-900 border dark:border-0 hover:shadow-lg group
+                <div class="w-5 h-5 mb-1 bg-white dark:bg-zinc-900 border dark:border-0 hover:shadow-lg group
                 border-zinc-200 rounded-full flex justify-center items-center cursor-pointer duration-200">
-                    <m-svg-icon name="guide" class="w-2 h-2" fillClass="fill-zinc-900 
+                    <m-svg-icon name="guide" class="w-3 h-3" fillClass="fill-zinc-900 
                     dark:fill-zinc-200 group-hover:fill-main"></m-svg-icon>
                 </div>
             </template>
@@ -24,9 +24,9 @@
         <m-popover class="flex items-center" placement="top-left">
             <!-- 触发弹层内容的图标 -->
             <template #reference>
-                <div class="w-4 h-4 mb-1 bg-white dark:bg-zinc-900 border dark:border-0 hover:shadow-lg group
+                <div class="w-5 h-5 mb-1 bg-white dark:bg-zinc-900 border dark:border-0 hover:shadow-lg group
                     border-zinc-200 rounded-full flex justify-center items-center cursor-pointer duration-200">
-                    <m-svg-icon name="feedback" class="w-2 h-2" fillClass="fill-zinc-900 
+                    <m-svg-icon name="feedback" class="w-3 h-3" fillClass="fill-zinc-900 
                     dark:fill-zinc-200 group-hover:fill-main"></m-svg-icon>
                 </div>
             </template>

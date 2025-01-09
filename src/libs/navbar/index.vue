@@ -1,5 +1,5 @@
 <template>
-    <div class="w-screen h-5 border-b flex items-center z-10 bg-white dark:bg-zinc-800
+    <div class="w-screen h-5 border-b flex items-center z-10 bg-white dark:bg-slate-800
     border-b-zinc-200" :class="[sticky ? 'sticky top-0 left-0' : 'relative']">
         <!-- 左 -->
         <div class="h-full w-5 absolute left-0 flex items-center" @click="onClickLeft">
@@ -9,7 +9,8 @@
             </slot>
         </div>
         <!-- 中 -->
-        <div class="h-full flex items-center justify-center m-auto font-bold text-base text-zinc-900">
+        <div
+            class="h-full flex items-center justify-center m-auto font-bold text-base text-zinc-900 dark:text-zinc-200">
             <slot name="center"></slot>
         </div>
         <!-- 右 -->
@@ -21,7 +22,10 @@
 
 <script setup>
 import { useRouter } from 'vue-router';
+
+//  注册 useRouter
 const router = useRouter()
+
 
 const props = defineProps({
     // 左边按钮的点击

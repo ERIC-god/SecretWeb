@@ -37,7 +37,7 @@ const sizeEnum = {
     // icon按钮
     'icon-default': {
         button: 'w-4 h-4',
-        icon: 'w-1.5 h-1.5'
+        icon: 'w-2 h-2'
     },
     small: {
         button: 'w-7 h-3 text-base',

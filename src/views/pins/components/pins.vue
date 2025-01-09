@@ -1,5 +1,5 @@
 <template>
-    <div class="fixed top-0 left-0 w-screen h-screen  text-xl bg-slate-200 z-20">
+    <div class="fixed top-0 left-0 w-screen h-screen dark:bg-slate-800 text-xl bg-slate-200 z-20">
         <!-- 移动端下的navBar -->
         <m-navbar v-if="isMobileTerminal">
             <template #center>
@@ -29,9 +29,11 @@
                 <!-- 标题 -->
                 <p class="text-base text-zinc-900 dark:text-zinc-200 ml-1 font-bold xl:text-xl xl:mb-5">
                     {{ pexelsData.title }}
-                    {{ pexelsData.author }}
                 </p>
                 <!-- 作者 -->
+                <p class="text-base text-zinc-900 dark:text-zinc-200 ml-1 font-bold xl:text-xl xl:mb-5">
+                    {{ pexelsData.author }}
+                </p>
             </div>
         </div>
     </div>
@@ -42,6 +44,10 @@ import { getPexlesFromId } from '@/api/pexels';
 import { onMounted, ref } from 'vue';
 import { isMobileTerminal } from '@/utils/flexible';
 import { useRouter } from 'vue-router';
+import { useScrollLock } from '@vueuse/core';
+// 锁定滚动 , 使用 VueUse 中的 useScrollLock
+const isLock = useScrollLock(document.documentElement)
+// 注册useRouter
 const router = useRouter()
 const props = defineProps({
     id: {
@@ -58,6 +64,8 @@ const getPexlesData = async () => {
 }
 onMounted(() => {
     getPexlesData()
+    // 锁定屏幕，避免屏幕滑动
+    isLock.value = true
 })
 
 /**

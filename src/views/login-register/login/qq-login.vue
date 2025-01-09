@@ -13,9 +13,9 @@ const QQ_LOGIN_URL =
 
 <script setup>
 import { onMounted } from 'vue'
-import { sendBoardcast, clearBoardcast, waitBoardcast } from './boardcast';
+import { sendBoardcast, waitBoardcast } from './boardcast';
 import { oauthLogin } from './oauth.js'
-
+import { message } from '@/libs/message/index.js'
 
 // QQ 登录挂起
 onMounted(() => {
@@ -55,7 +55,8 @@ onMounted(() => {
  * 登录按钮事件
  */
 const onQQLogin = () => {
-    openQQWindow()
+    message('error', 'The QQ Accession is Temporarily Unavailable')
+    // openQQWindow()
 }
 
 /**

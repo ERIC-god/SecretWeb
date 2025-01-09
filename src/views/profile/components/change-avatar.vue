@@ -1,9 +1,9 @@
 <template>
-    <div class="overflow-hidden relative flex flex-col items-center">
+    <div class="relative flex flex-col items-center">
         <m-svg-icon v-if="isMobileTerminal" name="close" class="w-3 h-3 p-0.5 m-1 ml-auto"
-            fillClass="fill-zinc-900 dark:fill-zinc-200 " @click="close">
+            fillClass="fill-zinc-900 dark:fill-zinc-200 " @click="onCancelClick">
         </m-svg-icon>
-        <img class="" ref="imageTarget" :src="imageSrc" />
+        <img class="h-44 w-60" ref="imageTarget" :src="imageSrc" />
         <!-- 按钮 -->
         <div class="flex justify-end translate-y-[4px]">
             <m-button type="info" class="mr-2" @click="onCancelClick">{{

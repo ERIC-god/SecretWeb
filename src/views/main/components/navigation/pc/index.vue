@@ -22,7 +22,6 @@
 
 <script setup>
 import { ref } from 'vue';
-import { getPexlesList } from '@/api/pexels';
 import { useCategoryStore } from '@/store/modules/category';
 
 // 初始化useCategoryStore
@@ -51,8 +50,6 @@ const currentCategoryIndex = ref(0)
 const onItemClick = (item, index) => {
     // 切换当前的index
     currentCategoryIndex.value = index
-
-
     categoryStore.toggleCategoryId(item.id)
 }
 

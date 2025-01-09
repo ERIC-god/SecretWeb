@@ -1,9 +1,11 @@
 <template>
     <div class="h-screen w-screen flex justify-center bg-zinc-700">
-        <div class="h-full w-[400px]  ">
+        <div class="h-full w-[400px] xl:w-[25%]  ">
             <!-- 上方字体 -->
-            <div class="w-full h-16  flex items-center justify-center">
-                <span class="text-black">A Secret Man</span>
+            <div class=" h-16 w-full flex items-center justify-center">
+                <span class="text-zinc-300 absolute top-[4%] xl:top-[6%]  text-center">Welcome To A Secret
+                    Man's
+                    WebSite</span>
             </div>
             <!-- 下方注册-->
             <div class="w-full h-52 bg-zinc-300 rounded shadow-md relative">
@@ -60,8 +62,8 @@
 
                     <!-- 注册按钮 -->
                     <div class="w-full h-8  mt-3 flex items-center justify-center">
-                        <m-button icon="hacker" class="text-zinc-200 text-xl h-4 w-32 bg-zinc-400 rounded 
-                        hover:bg-zinc-600" :loading="loading"></m-button>
+                        <m-button icon="hacker" class="text-zinc-200 text-xl h-4 w-12 dark:bg-zinc-500 rounded 
+                        hover:bg-zinc-600 bg-zinc-200" :loading="loading"></m-button>
                     </div>
                 </Form>
             </div>
