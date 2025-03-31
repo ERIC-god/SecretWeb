@@ -50,11 +50,12 @@ const props = defineProps({
     placement: {
         type: String,
         default: PROP_TOP_LEFT,
-        validate(val) {
+        validator(val) {
             const result = placementEnum.includes(val)
             if (!result) {
                 throw new Error(`您输入的值不在${placementEnum.join('、')}中！`)
             } else {
+                // return true就证明通过。
                 return result
             }
         }
@@ -83,7 +84,9 @@ const onMouseleave = () => {
 /**
  *  计算元素的尺寸  referenceTarget 或 contentTarget 的尺寸)
  */
+// 触发弹层的视图
 const referenceTarget = ref(null)
+// 弹出层视图中展示的内容
 const contentTarget = ref(null)
 const useElementSize = (target) => {
     if (!target) return {}

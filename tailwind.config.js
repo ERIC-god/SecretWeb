@@ -1,8 +1,12 @@
+// 使用 tailwind 插件 （Tailwind CSS IntelliSense）
+// 将 Tailwind CSS 安装为 PostCSS 插件是将其与 webpack、Rollup、Vite 和 Parcel 等构建工具集成的最无缝方式。
+// 1. npm install -D tailwindcss postcss autoprefixer    2. npx tailwindcss init
+
 /** @type {import('tailwindcss').Config} */
 export default {
   // 手动切换暗黑模式
   darkMode: 'class',
-  // tailwind应用
+  // tailwind应用, 配置模板文件的路径
   content: ['./index.html', './src/**/*.{vue,js}'],
   theme: {
     extend: {

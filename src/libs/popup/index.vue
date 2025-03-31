@@ -7,7 +7,7 @@
             </div>
         </transition>
         <!-- 内容 -->
-        <transition name=" pop-up-down">
+        <transition name="pop-up-down">
             <div v-bind="$attrs" v-if="modelValue" class="w-screen bg-white dark:bg-zinc-800 z-50 fixed bottom-0">
                 <slot />
             </div>
@@ -68,6 +68,6 @@ watch(() => props.modelValue, (val) => {
 
 .pop-up-down-enter-from,
 .pop-up-down-leave-to {
-    transform: translateY(100%);
+    transform: translateX(-100%);
 }
 </style>

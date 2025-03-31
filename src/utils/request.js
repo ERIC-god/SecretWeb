@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useUserStore } from '../store/modules/user'
 
 const service = axios.create({
-  // 根据项目的状态，自动切换请求的服务地址
+  // 根据项目的状态，自动切换请求的服务地址 ， 使用暴露出来的变量
   baseURL: import.meta.env.VITE_BASE_API,
   timeout: 5000,
 })
@@ -43,6 +43,7 @@ service.interceptors.response.use(
       error.response.data &&
       error.response.data.code === 401
     ) {
+      const userStore = useUserStore()
       // 退出
       userStore.userLogout()
     }

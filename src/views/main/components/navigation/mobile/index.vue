@@ -3,7 +3,7 @@
         <ul ref="ulTarget" class="relative flex overflow-x-auto p-1 text-zinc-600 text-xs overflow-y-hidden">
             <!-- 滑块 -->
             <li ref="sliderTarget" :style="sliderStyle"
-                class="absolute h-[22px]  bg-zinc-900 dark:bg-zinc-800 rounded-lg duration-200">
+                class="absolute h-[22px]  bg-zinc-900 dark:bg-zinc-800 rounded-lg duration-300">
             </li>
             <!-- 汉堡按钮 -->
             <li @click="onShowPopup" class="fixed top-0 right-[-1px] h-4 px-1 flex items-center bg-white dark:bg-zinc-900
@@ -71,6 +71,8 @@ const ulTarget = ref(null)
 // 通过VueUse --> useScroll 获取响应式的 scroll 滚动距离
 const { x: ulScrollLeft } = useScroll(ulTarget)
 
+
+
 // watch 监听
 watch(currentCategoryIndex, (val) => {
     const { width, left } = itemRefs.value[val].getBoundingClientRect()
@@ -79,6 +81,8 @@ watch(currentCategoryIndex, (val) => {
         transform: `translateX(${ulScrollLeft.value + left - 10}px)`,
         width: width + 'px'
     }
+    console.log(itemRefs.value);
+
 })
 
 // item 点击事件

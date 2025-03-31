@@ -10,7 +10,7 @@
         <m-svg-icon :name="icon" v-if="icon" :class="sizeEnum[sizeKey].icon" :color="iconColor"
             :fillClass="iconClass"></m-svg-icon>
         <!-- 文字按钮 -->
-        <slot v-else />
+        <slot v-if="!loading&&!icon" />
     </button>
 
 </template>

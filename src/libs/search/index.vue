@@ -76,8 +76,6 @@ const props = defineProps({
 })
 
 
-const data = [1, 2, 3, 4, 5]
-
 const emits = defineEmits([EMIT_UPDATE_MODELVALUE, EMIT_SEARCH, EMIT_CLEAR, EMIT_INPUT, EMIT_FOCUS, EMIT_BLUR])
 
 const inputValue = useVModel(props)
