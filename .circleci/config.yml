@@ -22,6 +22,9 @@ jobs:
       - run:
           name: Build
           command: pnpm build
-      # - run: 
-      #     name: Deploy
-      #     command: 
+      - run: 
+          name: Deploy
+          command: chmod +x scripts/deploy.sh
+      - run:
+          name: Run Deploy
+          command: ./scripts/deploy.sh
