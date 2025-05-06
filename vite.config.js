@@ -2,7 +2,7 @@
 // 即使你使用 ES 模块语法，Vite 也会正确处理这个配置文件
 // 配置文件会在 Node.js 环境中运行，而不是在浏览器环境
 // Vite 会自动处理配置文件中的 CommonJS 和 ES 模块混用情况
-//
+
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path, { join } from 'path'
