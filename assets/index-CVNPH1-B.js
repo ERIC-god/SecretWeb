@@ -1,0 +1,1 @@
+import{W as a,ad as r}from"./index-JqDeAB-5.js";import f from"./index-BiMaLGkf.js";const b=(o,n,c,e)=>new Promise((m,d)=>{o&&!n&&(n=o,o="");const s=a(f,{title:o,content:n,cancelText:c,confirmText:e,close:()=>{r(null,document.body)},cancelHandler:()=>{d(new Error("取消按钮点击"))},confirmHandler:()=>{m()}});r(s,document.body)});export{b as c};
