@@ -22,3 +22,6 @@ jobs:
       - run:
           name: Build
           command: pnpm build
+      # - run: 
+      #     name: Deploy
+      #     command: 
