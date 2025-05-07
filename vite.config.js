@@ -10,7 +10,6 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: process.env.NODE_ENV === 'production' ? '/SecretWeb' : '/',
   plugins: [
     vue(),
     // 配置 vite-plugin-svg-icons 在 vite.config.js 中的配置插件
