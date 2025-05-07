@@ -1,7 +1,7 @@
 <script setup>
 
 import { message } from './libs/message/index.js';
-// message('success', 'Welcome！', 3000)
+message('success', 'Welcome！', 3000)
 
 
 
