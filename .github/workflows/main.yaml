@@ -32,11 +32,6 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            echo "Testing SSH connection"
-            pwd
-            whoami
-            ls -la
           source: "dist.tar.gz"
           target: ${{ secrets.DEPLOY_PATH }}
 
