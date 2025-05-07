@@ -24,6 +24,30 @@ jobs:
         run: pnpm run build
       - name: 打包dist目录
         run: tar -czf dist.tar.gz dist
+      - name: Debug Secrets
+        run: |
+          echo "=== 检查 SSH_USER ==="
+          echo "SSH_USER 值："
+          echo "${{ secrets.SSH_USER }}" | cat -A  # 显示隐藏字符
+          echo "SSH_USER 长度："
+          echo -n "${{ secrets.SSH_USER }}" | wc -c
+          
+          echo -e "\n=== 检查 SSH_HOST ==="
+          echo "SSH_HOST 值："
+          echo "${{ secrets.SSH_HOST }}" | cat -A
+          echo "SSH_HOST 长度："
+          echo -n "${{ secrets.SSH_HOST }}" | wc -c
+          
+          echo -e "\n=== 检查 SSH_PRIVATE_KEY 格式 ==="
+          echo "SSH_PRIVATE_KEY 前5行："
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" | head -n 5
+          echo "SSH_PRIVATE_KEY 末5行："
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" | tail -n 5
+          
+          echo -e "\n=== 检查是否有多余的换行或空格 ==="
+          echo "SSH_USER:" && echo "${{ secrets.SSH_USER }}" | xxd
+          echo "SSH_HOST:" && echo "${{ secrets.SSH_HOST }}" | xxd
+
 
       - name: Debug SSH
         run: |
