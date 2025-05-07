@@ -1,5 +1,5 @@
 name: Continuous Integration #action名称
-#
+
 on: 
   push:
     branches:
@@ -24,6 +24,16 @@ jobs:
         run: pnpm run build
       - name: 打包dist目录
         run: tar -czf dist.tar.gz dist
+
+      - name: Debug SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          echo "显示密钥信息："
+          ssh-keygen -l -f ~/.ssh/id_ed25519
+          echo "测试连接："
+          ssh -v -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'echo "test"'
       
       - name: 通过SSH部署到服务器
         uses: appleboy/scp-action@v0.1.7
