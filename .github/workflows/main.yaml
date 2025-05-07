@@ -46,3 +46,6 @@ jobs:
             cd ${{ secrets.DEPLOY_PATH }}
             tar -xzf dist.tar.gz
             rm dist.tar.gz
+
+
+            
