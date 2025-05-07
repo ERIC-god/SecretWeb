@@ -5,67 +5,38 @@ on:
     branches:
       - master 
 
-# jobs:
-  # build-and-deploy:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: 拉取代码
-  #       uses: actions/checkout@v3
-
-  #     - name: 安装Node.js
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: '20'   # 根据你的项目选择版本
-  #     - name: 安装pnpm
-  #       run: npm i -g pnpm
-  #     - name: 安装依赖
-  #       run: pnpm i
-  #     - name: 构建项目
-  #       run: pnpm run build
-  #     - name: 打包dist目录
-  #       run: tar -czf dist.tar.gz dist
-      
-
-  #     - name: Debug SSH
-  #       run: |
-  #         mkdir -p ~/.ssh
-  #         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
-  #         chmod 600 ~/.ssh/id_ed25519
-  #         echo "测试 DNS 解析："
-  #         ping -c 1 ${{ secrets.SSH_HOST }}
-  #         echo "SSH HOST 值："
-  #         echo "${{ secrets.SSH_HOST }}"
-  #         echo "测试 SSH 连接："
-  #         ssh -v -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'echo "test"'      
-      
-  #     - name: 通过SSH部署到服务器
-  #       uses: appleboy/scp-action@v0.1.7
-  #       with:
-  #         host: ${{ secrets.SSH_HOST }}
-  #         username: ${{ secrets.SSH_USER }}
-  #         port: ${{ secrets.SSH_PORT }}
-  #         key: ${{ secrets.SSH_PRIVATE_KEY }}
-  #         source: "dist.tar.gz"
-  #         target: ${{ secrets.DEPLOY_PATH }}
-
-  #     - name: 远程解压并重启服务
-  #       uses: appleboy/ssh-action@v1.0.3
-  #       with:
-  #         host: ${{ secrets.SSH_HOST }}
-  #         username: ${{ secrets.SSH_USER }}
-  #         port: ${{ secrets.SSH_PORT }}
-  #         key: ${{ secrets.SSH_PRIVATE_KEY }}
-  #         script: |
-  #           cd ${{ secrets.DEPLOY_PATH }}
-  #           tar -xzf dist.tar.gz
-  #           rm dist.tar.gz
-
-
 jobs:
-  test:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Test SSH
+      - name: 拉取代码
+        uses: actions/checkout@v3
+
+      - name: 安装Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'   # 根据你的项目选择版本
+      - name: 安装pnpm
+        run: npm i -g pnpm
+      - name: 安装依赖
+        run: pnpm i
+      - name: 构建项目
+        run: pnpm run build
+      - name: 打包dist目录
+        run: tar -czf dist.tar.gz dist
+      
+      
+      - name: 通过SSH部署到服务器
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "dist.tar.gz"
+          target: ${{ secrets.DEPLOY_PATH }}
+
+      - name: 远程解压并重启服务
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -73,6 +44,23 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            pwd
-            whoami
-            echo "测试成功"          
+            cd ${{ secrets.DEPLOY_PATH }}
+            tar -xzf dist.tar.gz
+            rm dist.tar.gz
+
+
+# jobs:
+#   test:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Test SSH
+#         uses: appleboy/ssh-action@v1.0.3
+#         with:
+#           host: ${{ secrets.SSH_HOST }}
+#           username: ${{ secrets.SSH_USER }}
+#           port: ${{ secrets.SSH_PORT }}
+#           key: ${{ secrets.SSH_PRIVATE_KEY }}
+#           script: |
+#             pwd
+#             whoami
+#             echo "测试成功"          
