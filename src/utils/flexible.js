@@ -5,19 +5,35 @@ import { useWindowSize } from '@vueuse/core'
 /**
  * 判断当前是否为移动设备，判断依据为屏幕宽度是否小于一个指定宽度(1280)
  */
-export const isMobileTerminal = computed(() => {
-  const { width } = useWindowSize()
-  return width.value < PC_DEVICE_WIDTH
-})
+// export const isMobileTerminal = computed(() => {
+//   const { width } = useWindowSize()
+//   return width.value < PC_DEVICE_WIDTH
+// })
 
 /**
  * 实际开发中更建议以下代码
- *
- * const isMobileTerminal=computed(()=>{
-    return /Android|webOs|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent)
-    })
- *
  */
+
+export const isMobileTerminal = computed(() => {
+  console.log(navigator.userAgent)
+
+  // 1. 通过用户代理检测
+  const userAgentCheck =
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Windows Phone|Kindle|Silk/i.test(
+      navigator.userAgent
+    )
+
+  // 2. 通过屏幕宽度检测（小于768px通常认为是移动设备）
+  const screenCheck = window.innerWidth < 768
+
+  // 3. 触摸设备检测
+  const touchCheck = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+  console.log('ontouchstart' in window)
+
+  // 主要依靠用户代理和屏幕宽度，其他作为辅助判断
+  // 可以根据具体需求调整逻辑组合
+  return userAgentCheck || (screenCheck && touchCheck)
+})
 
 /**
  * 动态指定rem基准， 最大为40px

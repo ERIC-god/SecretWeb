@@ -1,6 +1,6 @@
 <template>
     <transition name="slide" @after-leave="destroy">
-        <div v-show="isVisable" class="min-w-[420px] xl:w-[500px] fixed top-[7%] left-[50%] translate-x-[-50%] z-50 
+        <div v-show="isVisable" class="vw-w-700 h-[30px] fixed top-[7%] left-[50%] translate-x-[-50%] z-50 
             flex items-center 
             px-3 py-1.5 rounded-sm border cursor-pointer" :class="styles[type].containerClass">
             <m-svg-icon :name="styles[type].icon" :fillClass="styles[type].fillClass"

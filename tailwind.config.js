@@ -44,5 +44,9 @@ export default {
       },
     },
   },
-  plugins: [require('tailwind-scrollbar')],
+
+  plugins: [
+    require('tailwind-scrollbar'),
+    require('./src/plugins/tailwind-vw-plugin/index'),
+  ],
 }

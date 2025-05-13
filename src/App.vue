@@ -1,9 +1,11 @@
 <script setup>
 
 import { message } from './libs/message/index.js';
+
 message('success', 'Welcome！', 3000)
 
-//
+
+
 
 </script>
 
@@ -19,4 +21,7 @@ message('success', 'Welcome！', 3000)
 
 </template>
 
-<style scoped></style>
+<style scoped>
+
+
+</style>

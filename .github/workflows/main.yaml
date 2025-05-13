@@ -36,7 +36,7 @@ jobs:
           source: "dist.tar.gz"
           target: ${{ secrets.DEPLOY_PATH }}
 
-      - name: 远程解压并重启服务
+      - name: 远程解压
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST }}
