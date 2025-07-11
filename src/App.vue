@@ -2,6 +2,7 @@
 
 import { message } from './libs/message/index.js';
 
+
 message('success', 'Welcome！', 3000)
 
 
